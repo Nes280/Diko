@@ -5,7 +5,7 @@ class NoeudsController extends AppController
 {
 	public function index()
     {
-        $noeuds = $this->Noeuds->find('all');
+		$noeuds = $this->Noeuds->find('all', ['limit' => 20, 'order' => ['poids' => 'desc']]);
         $this->set('noeuds', $noeuds);
     }
 	

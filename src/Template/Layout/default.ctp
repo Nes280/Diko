@@ -15,43 +15,48 @@
 
 $cakeDescription = 'CakePHP: the rapid development php framework';
 ?>
+
 <!DOCTYPE html>
 <html>
-<head>
-    <?= $this->Html->charset() ?>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>
-        <?= $cakeDescription ?>:
-        <?= $this->fetch('title') ?>
-    </title>
-    <?= $this->Html->meta('icon') ?>
-	
-    <?= $this->Html->css('foundation.min') ?>
-    <?= $this->Html->script('vendor/jquery.js') ?>
-	<?= $this->Html->script('vendor/fastclick.js') ?>
-    <?= $this->Html->script('foundation.min.js') ?>
+	<head>
+		<?= $this->Html->charset() ?>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>
+			Dictionnaire
+		</title>
+		<?= $this->Html->meta('icon') ?>
 
-    <?= $this->fetch('meta') ?>
-    <?= $this->fetch('css') ?>
-    <?= $this->fetch('script') ?>
-</head>
-<body>
-    <nav class="top-bar expanded" data-topbar role="navigation">
-       
-		<h1><a href=""><?= $this->fetch('title') ?></a></h1>
+		<?= $this->Html->css('foundation.min') ?>
+		<?= $this->Html->script('vendor/jquery.js') ?>
+		<?= $this->Html->script('vendor/fastclick.js') ?>
+		<?= $this->Html->script('foundation.min.js') ?>
 
+		<?= $this->fetch('meta') ?>
+		<?= $this->fetch('css') ?>
+		<?= $this->fetch('script') ?>
+	</head>
+	<body>
+		<nav class="top-bar expanded" data-topbar role="navigation">
+				<h1><a href="">Dictionnaire <!--<?= $this->fetch('title') ?>--> </a></h1>
+		</nav>
+		<?= $this->Flash->render() ?>
+		<div class="container">
+			<div class="panel">
+				<?= $this->fetch('content') ?>
+			</div>
+			
+			<div id="footer">
+				<div class='row'>
+					<div class='large-12 columns'>
+						<!--<p> Auteurs : Elsa Martel et Niels Benichou - Année 2016 2017 </p>-->
+					</div>
+				</div>
+			</div>
+		</div>
 
-    </nav>
-    <?= $this->Flash->render() ?>
-    <div class="container clearfix">
-        <?= $this->fetch('content') ?>
-    </div>
-    <footer>
-    </footer>
-	
-	<script>
-	  $(document).foundation();
-	</script>
+		<script>
+		  $(document).foundation();
+		</script>
 
-</body>
+	</body>
 </html>
