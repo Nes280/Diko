@@ -1,17 +1,7 @@
 </br>
-<div class="row">
-  <form>
-    <div class=medium-6 colums">
-	<label>
-	    <input type="text" placeholder="Recherche">
-	</label>
-    </div>
-   </form>
-</div>
-</br>
 </br>
 <div class="row">
-  <h3>Liste des mots avec les poids les plus forts</h3>
+  <h3>Liste des mots les plus fréquents</h3>
   <table>
     <thead>
 	<tr>
