@@ -21,7 +21,7 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
     <?= $this->Html->charset() ?>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>
-	Dictionnaire
+	Diko
     </title>
     <?= $this->Html->meta('icon') ?>
 	
