@@ -1,13 +1,18 @@
 </br>
 </br>
 <div class="row">
-	<h3>Choix des relations à afficher </h3>
-	<div class="row align-rigth">
-		<?php foreach ($relations as $relation): ?>
-			<div class="large-4 column">
-				<?= $relation->noml ?>
-			</div>
-		<?php endforeach; ?>		
-	</div>
-
+	<form>
+		<fieldset class="fieldset">
+			<legend>Choix des relations à afficher </legend>
+			<?php foreach ($relations as $relation): ?>
+				<input id="<?= $relation->id?>" type="checkbox" checked>
+				<label for="<?= $relation->id?>">
+					<B><?= $relation->noml ?></B>
+				</label>
+				<p class="help-text" id="<?= $relation->id?>"><?= $relation->description?></p>
+			<?php endforeach; ?>
+		</fieldset>
+		<button type="button" class="button">Enregistrer</button>
+	</form>
 </div>
+</br>
