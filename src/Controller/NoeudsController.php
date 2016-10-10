@@ -14,5 +14,15 @@ class NoeudsController extends AppController
         $noeud = $this->Noeuds->get($id);
         $this->set(compact('noeud'));
     }
+
+    function resultSearch(){
+        $search = $this->request->data['search'];
+        $noeuds = $this->Noeuds->find('all', array(
+            'conditions' => array(
+                'noeuds.mot LIKE'=>$search.'%')));
+        $this->set('noeuds',$this->paginate($noeuds));
+        //$this->set('noeuds',$this->paginate($noeuds));
+        //$this->render('index');
+    }
 }
 ?>

@@ -60,10 +60,13 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
       </ul>
     </div>
     <div class="top-bar-right">
-      <ul class="menu">
+      <!--ul class="menu">
         <li><input type="search" placeholder="Recherche"></li>
         <li><button type="button" class="button">Recherche</button></li>
-      </ul>
+      </ul!-->
+      <?php echo $this->Form->create('Post',array('id' => 'textBox', 'type' => 'post','url' => array('controller' => 'noeuds', 'action' => 'resultSearch'))); ?>
+                <?php echo $this->Form->input('search', array('label'=>"",'placeholder'=>'Rechercher','id'=>'search')); ?>
+              <?php echo $this->Form->end(); ?>
     </div>
   </div>
 </div>
