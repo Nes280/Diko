@@ -14,5 +14,6 @@
 		</fieldset>
 		<button type="button" class="button">Enregistrer</button>
 	</form>
+	<?= $c ?>
 </div>
 </br>
