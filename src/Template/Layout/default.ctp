@@ -29,7 +29,6 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
     <?= $this->Html->css('foundation-icons.css') ?>
     <?= $this->Html->css('perso.css') ?>
     <?= $this->Html->script('vendor/jquery.js') ?>
-    <?= $this->Html->script('vendor/fastclick.js') ?>
     <?= $this->Html->script('vendor/foundation.min.js') ?>
 
     <?= $this->fetch('meta') ?>
@@ -64,12 +63,15 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
         <li><input type="search" placeholder="Recherche"></li>
         <li><button type="button" class="button">Recherche</button></li>
       </ul!-->
-      <?php echo $this->Form->create('Post',array('id' => 'textBox', 'type' => 'post','url' => array('controller' => 'noeuds', 'action' => 'resultSearch'))); ?>
-                <?php echo $this->Form->input('search', array('label'=>"",'placeholder'=>'Rechercher','id'=>'search')); ?>
-              <?php echo $this->Form->end(); ?>
+      <?php //echo $this->Form->create('Post',array('id' => 'textBox', 'type' => 'post','url' => array('controller' => 'noeuds', 'action' => 'resultSearch'))); ?>
+                <?php //echo $this->Form->input('search', array('label'=>"",'placeholder'=>'Rechercher','id'=>'search')); ?>
+              <?php //echo $this->Form->end(); ?>
+      
     </div>
   </div>
 </div>
+<input type="text" id="searchBox" class="search-field" placeholder="Recherche"  />
+      <ul id="searchResults" class="term-list hidden" ></ul>
     <?= $this->Flash->render() ?>
     <div class="container clearfix">
         <?= $this->fetch('content') ?>
@@ -77,9 +79,9 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
     <div class="footer">
       <p> Auteurs : Elsa Martel et Niels Benichou - Année 2016 2017 </p>
     </div>
-	
+	 <script type="text/javascript" src="webroot/js/vendor/recherche.js"></script>
     <script>
-	$(document).foundation();
+	   $(document).foundation();
     </script>
 
 </body>
