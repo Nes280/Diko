@@ -23,6 +23,18 @@ var search = function() {
   
   evaluateResults();
 };
+var ajax = function(){
+  inputTerms = input.value.toLowerCase();
+  results = [];
+  termsArray = inputTerms.split(' ');
+  prefix = termsArray.length === 1 ? '' : termsArray.slice(0, -1).join(' ') + ' ';
+  terms = termsArray[termsArray.length -1].toLowerCase();
+  xhr = new XMLHttpRequest() ;
+  xhr.open("GET", "http://localhost/cakephpSearch.php?param=" + input.value, false) ;
+  xhr.send();
+  results.push(xhr.responseText);
+  evaluateResults();
+}
 
 var evaluateResults = function() {
   if (results.length > 0 && inputTerms.length > 0 && terms.length !== 0) {
@@ -71,4 +83,4 @@ var clearResults = function() {
   ul.innerHTML = '';
 };
   
-input.addEventListener("keyup", search, false);
+input.addEventListener("keyup", ajax, false);
