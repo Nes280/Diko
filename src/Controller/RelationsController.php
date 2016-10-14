@@ -21,20 +21,15 @@ class RelationsController extends AppController
 
 	}
 
-	public function index()
+	/*public function index()
     {
         $relations = $this->Relations->find('all');
         $this->set('relations', $relations);
 		
 		//Création de cookies
-		/*$this->Cookie->config('User', 'path', '/');
-		$this->Cookie->configKey('User', [
-			'expires' => '+10 days',
-			'httpOnly' => true
-		]);*/
-		$this->Cookie->write('User.name', 'Larry');
+		$this->Cookie->write('User.name', 'checked');
 		$this->Cookie->write('User.role', 'Lead');
-    }
+    }*/
 	
 	public function relations()
     {
@@ -42,13 +37,42 @@ class RelationsController extends AppController
         $this->set('relations', $relations);
 		
 		//Création de cookies
-		$this->Cookie->write('User.name', 'Larry');
-		$this->Cookie->write('User.role', 'Lead');
+		$tab = array();
+		$i = 0; 
+		foreach ($relations as $relation){
+			$this->Cookie->write('User.'. $relation->nomc , 'true');
+			$tab[$i] = $relation->nomc;
+			$i = $i +1; 
+		}
 		
-		$c =  $this->Cookie->read('User.name');
+		//Lecture d'un cookie
+		$c =  $this->Cookie->read('User');
 		$this->set("c", $c);
+		
+		echo $c['r_associated']; 
+		
+		if($this->request->is('post'))
+        {
+			//Recuperation des données
+			$d = $this->request->data;
+			
+			//Obliger pour pouvoir les comparer 
+			$arraye = array_combine($tab, $d);
 
+			//Change la valeur dans le cookie
+			foreach($arraye as $k => $a){
+				echo $k  . " " . $a . "\n";
+				if($a === '0'){
+					$this->Cookie->write('User.' . $k , 'false');
+				}
+				
+			}
+			
+			$c =  $this->Cookie->read('User');
+			$this->set("c", $c);
+		}
     }
+	
     
     /*public function view($id = null)
     {

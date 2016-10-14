@@ -1,19 +1,19 @@
 </br>
 </br>
 <div class="row">
-	<form>
-		<fieldset class="fieldset">
-			<legend>Choix des relations à afficher </legend>
+	<?php echo $this->Form->create('Relations');?>
+	<fieldset class="fieldset">
+		<legend>Choix des relations à afficher </legend>
 			<?php foreach ($relations as $relation): ?>
-				<input id="<?= $relation->id?>" type="checkbox" checked>
-				<label for="<?= $relation->id?>">
-					<B><?= $relation->noml ?></B>
-				</label>
+				<B> 
+					<?php echo $this->Form->input("$relation->noml", ['type' => 'checkbox', 'id' => "$relation->id", 'value' => "$relation->nomc", 'checked' => "false"]);?>
+				</B>
 				<p class="help-text" id="<?= $relation->id?>"><?= $relation->description?></p>
 			<?php endforeach; ?>
-		</fieldset>
-		<button type="button" class="button">Enregistrer</button>
-	</form>
-	<?= $c ?>
+	</fieldset>
+	<?php echo $this->Form->button('Ajouter');
+	echo $this->Form->end();?>
+
+	<?php echo $c['r_associated']; ?>
 </div>
-</br>
+
