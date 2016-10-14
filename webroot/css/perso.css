@@ -45,7 +45,7 @@
 
 .search-field {
   display: block;
-  width: 30%;
+  width: auto;
   margin: 1em auto 0;
   padding: 0.5em 10px;
   border: 1px solid #999;

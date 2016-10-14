@@ -1,39 +1,21 @@
-var searchIndex = ["404 Error","Address Bar","Ajax","Apache","Autoresponder","BitTorrent","Blog","Bookmark","Bot","Broadband","Captcha","Certificate","Client","Cloud","Cloud Computing","CMS","Cookie","CSS","Cyberspace","Denial of Service","DHCP","Dial-up","DNS Record","Domain Name","Download","E-mail","Facebook","FiOS","Firewall","FTP","Gateway","Google","Google Drive","Gopher","Hashtag","Hit","Home Page","HTML","HTTP","HTTPS","Hyperlink","Hypertext","ICANN","Inbox","Internet","InterNIC","IP","IP Address","IPv4","IPv6","IRC","iSCSI","ISDN","ISP","JavaScript","jQuery","Meta Search Engine","Meta Tag","Minisite","Mirror","Name Server","Packet","Page View","Payload","Phishing","POP3","Protocol","Scraping","Search Engine","Social Networking","Socket","Spam","Spider","Spoofing","SSH","SSL","Static Website","Twitter","XHTML"];
-
 var input = document.getElementById("searchBox"),
     ul = document.getElementById("searchResults"),
     inputTerms, termsArray, prefix, terms, results, sortedResults;
 
-
-var search = function() {
-  inputTerms = input.value.toLowerCase();
-  results = [];
-  termsArray = inputTerms.split(' ');
-  prefix = termsArray.length === 1 ? '' : termsArray.slice(0, -1).join(' ') + ' ';
-  terms = termsArray[termsArray.length -1].toLowerCase();
-  
-  for (var i = 0; i < searchIndex.length; i++) {
-    var a = searchIndex[i].toLowerCase(),
-        t = a.indexOf(terms);
-    
-    if (t > -1) {
-      results.push(a);
-    }
-  }
-  
-  evaluateResults();
-};
 var ajax = function(){
-  inputTerms = input.value.toLowerCase();
-  results = [];
-  termsArray = inputTerms.split(' ');
-  prefix = termsArray.length === 1 ? '' : termsArray.slice(0, -1).join(' ') + ' ';
-  terms = termsArray[termsArray.length -1].toLowerCase();
-  xhr = new XMLHttpRequest() ;
-  xhr.open("GET", "http://localhost/cakephpSearch.php?param=" + input.value, false) ;
-  xhr.send();
-  results.push(xhr.responseText);
-  evaluateResults();
+  if(input.value.length > 2){
+    inputTerms = input.value.toLowerCase();
+    results = [];
+    termsArray = inputTerms.split(' ');
+    prefix = termsArray.length === 1 ? '' : termsArray.slice(0, -1).join(' ') + ' ';
+    terms = termsArray[termsArray.length -1].toLowerCase();
+    xhr = new XMLHttpRequest() ;
+    xhr.open("GET", "http://localhost/cakephpSearch.php?param=" + input.value, false) ;
+    xhr.send();
+    results.push(xhr.responseText);
+    evaluateResults();
+ }
+ else clearResults();
 }
 
 var evaluateResults = function() {
