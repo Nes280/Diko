@@ -49,25 +49,25 @@ class RelationsController extends AppController
 		$c =  $this->Cookie->read('User');
 		$this->set("c", $c);
 		
-		echo $c['r_associated']; 
+		//echo $c['r_associated']; 
 		
 		if($this->request->is('post'))
         {
 			//Recuperation des données
 			$d = $this->request->data;
 			
+			//echo sizeof($d);
+			//echo sizeof($tab);
 			//Obliger pour pouvoir les comparer 
 			$arraye = array_combine($tab, $d);
 
 			//Change la valeur dans le cookie
 			foreach($arraye as $k => $a){
-				echo $k  . " " . $a . "\n";
+				//echo $k  . " " . $a . "\n";
 				if($a === '0'){
 					$this->Cookie->write('User.' . $k , 'false');
-				}
-				
+				}				
 			}
-			
 			$c =  $this->Cookie->read('User');
 			$this->set("c", $c);
 		}
