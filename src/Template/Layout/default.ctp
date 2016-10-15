@@ -54,7 +54,7 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
           </ul>
         </li>
         <li><a href="#">Two</a></li>
-        <li><a href="Relations/index">Relation</a></li>
+        <li><a href="Relations/relations">Relation</a></li>
       </ul>
     </div>
     <div class="top-bar-right">
