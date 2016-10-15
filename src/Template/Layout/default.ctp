@@ -54,7 +54,7 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
           </ul>
         </li>
         <li><a href="#">Two</a></li>
-        <li><a href="Relations/relations">Relation</a></li>
+        <li><a href="Relations/index">Relation</a></li>
       </ul>
     </div>
     <div class="top-bar-right">
@@ -63,7 +63,7 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
 </div>
 <input type="text" id="searchBox" class="search-field" placeholder="Recherche"  />
 <ul id="searchResults" class="term-list hidden" ></ul>
-<script type="text/javascript" src="webroot/js/vendor/recherche.js"></script>
+<script type="text/javascript" src="/diko/webroot/js/vendor/recherche.js"></script>
     <?= $this->Flash->render() ?>
     <div class="container clearfix">
         <?= $this->fetch('content') ?>

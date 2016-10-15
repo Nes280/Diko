@@ -3,6 +3,7 @@ var input = document.getElementById("searchBox"),
     inputTerms, termsArray, prefix, terms, results, sortedResults;
 
 var ajax = function(){
+  var i = 0;
   if(input.value.length > 2){
     inputTerms = input.value.toLowerCase();
     results = [];
@@ -10,15 +11,22 @@ var ajax = function(){
     prefix = termsArray.length === 1 ? '' : termsArray.slice(0, -1).join(' ') + ' ';
     terms = termsArray[termsArray.length -1].toLowerCase();
     xhr = new XMLHttpRequest() ;
-    xhr.open("GET", "http://localhost/cakephpSearch.php?param=" + input.value, false) ;
+    xhr.open("GET", "http://localhost/cakephpSearch.php?param=" + input.value) ;
     xhr.send();
-    results.push(xhr.responseText);
-    evaluateResults();
- }
+    xhr.onreadystatechange = function() {
+        if (xhr.responseText != "") {
+          results.pop();
+          results.push(xhr.responseText);
+          evaluateResults();
+        };
+        
+      };
+  }
  else clearResults();
 }
 
 var evaluateResults = function() {
+  console.log(results);
   if (results.length > 0 && inputTerms.length > 0 && terms.length !== 0) {
     sortedResults = results.sort(sortResults);
     appendResults();
