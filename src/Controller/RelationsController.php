@@ -18,6 +18,7 @@ class RelationsController extends AppController
 	{
 		$this->Cookie->config('name', 'User');
 		$this->Cookie->configKey('User', 'encryption', false);
+		//$this->Cookie->configKey('User', 'httpOnly', false);
 
 	}
 
@@ -30,6 +31,7 @@ class RelationsController extends AppController
 		$this->Cookie->write('User.name', 'checked');
 		$this->Cookie->write('User.role', 'Lead');
     }*/
+	
 	
 	public function relations()
     {
@@ -48,6 +50,12 @@ class RelationsController extends AppController
 		//Lecture d'un cookie
 		$c =  $this->Cookie->read('User');
 		$this->set("c", $c);
+		
+		$start_memory = memory_get_usage();
+        $temp = unserialize(serialize($c));
+        $taille = memory_get_usage() - $start_memory;
+		
+		echo $taille .' octet(s)';
 		
 		//echo $c['r_associated']; 
 		
@@ -73,6 +81,8 @@ class RelationsController extends AppController
 		}
     }
 	
+	
+
     
     /*public function view($id = null)
     {
