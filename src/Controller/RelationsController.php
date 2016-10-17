@@ -14,13 +14,13 @@ class RelationsController extends AppController
 
     }
 	
-	public function beforeFilter(Event $event)
+	/*public function beforeFilter(Event $event)
 	{
-		$this->Cookie->config('name', 'User');
-		$this->Cookie->configKey('User', 'encryption', false);
+		//$this->Cookie->config('name', 'User');
+		//$this->Cookie->configKey('User', 'encryption', false);
 		//$this->Cookie->configKey('User', 'httpOnly', false);
 
-	}
+	}*/
 
 	/*public function index()
     {
