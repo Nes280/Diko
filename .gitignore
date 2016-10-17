@@ -75,6 +75,5 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 tmp/debug_kit.sqlite
-tmp/debug_kit.sqlite
 
 *.sqlite
