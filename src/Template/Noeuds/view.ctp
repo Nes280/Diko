@@ -12,7 +12,12 @@
 			<?php endforeach; ?>
 	    </ul>
 	  </li>
-	  <li><a href="#">Item 2</a></li>
+	  <?php
+	  	if ($r_associated == "checked") {
+	  	 	echo "<li><a href=\"#\">Idée(s) Associée</a></li>";
+	  	 } 
+	  ?>
+	  
 	</ul>
   	
   	<p><?= h($noeud->type) ?></p>
