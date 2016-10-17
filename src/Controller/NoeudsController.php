@@ -13,6 +13,7 @@ class NoeudsController extends AppController
     {
         $noeud = $this->Noeuds->get($id);
         $this->set(compact('noeud'));
+		echo $this->request->session()->read('User.r_associated');		
     }
 }
 ?>
