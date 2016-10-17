@@ -6,57 +6,40 @@ use Cake\Event\Event;
 
 class RelationsController extends AppController
 {
-	public function initialize()
-    {
-        parent::initialize();
 
-        $this->loadComponent('Cookie');
-
-    }
-	
-	/*public function beforeFilter(Event $event)
-	{
-		//$this->Cookie->config('name', 'User');
-		//$this->Cookie->configKey('User', 'encryption', false);
-		//$this->Cookie->configKey('User', 'httpOnly', false);
-
-	}*/
-
-	/*public function index()
-    {
-        $relations = $this->Relations->find('all');
-        $this->set('relations', $relations);
-		
-		//Création de cookies
-		$this->Cookie->write('User.name', 'checked');
-		$this->Cookie->write('User.role', 'Lead');
-    }*/
-	
-	
 	public function relations()
     {
+		//Requêtes pour avoir les relations
         $relations = $this->Relations->find('all');
         $this->set('relations', $relations);
 		
-		//Création de cookies
+		//Création de tableau pour après
 		$tab = array();
-		$i = 0; 
-		foreach ($relations as $relation){
-			$this->Cookie->write('User.'. $relation->nomc , 'checked');
-			$this->request->session()->write('User.'. $relation->nomc , 'checked');
-			$tab[$i] = $relation->nomc;
-			$i = $i +1; 
+		$c = array();
+		
+		$r = $this->request->session()->read("diko");
+		//Si il y a pas de sessions avant
+		if($r !== 'true'){
+			//Création des variables de sessions
+			$i = 0; 
+			foreach ($relations as $relation){
+				$this->request->session()->write('User.'. $relation->nomc , 'checked');
+				$c[$relation->nomc] = 'checked'; 
+				$tab[$i] = $relation->nomc;
+				$i = $i +1; 
+			}
+			$this->request->session()->write('diko', 'true');
 		}
-		
-		//Lecture d'un cookie
-		$c =  $this->Cookie->read('User');
-		$this->set("c", $c);
-		
-		$start_memory = memory_get_usage();
-        $temp = unserialize(serialize($c));
-        $taille = memory_get_usage() - $start_memory;
-		
-		echo $taille .' octet(s)';
+		else{
+			//initialisation des tableaux
+			$i = 0; 
+			foreach ($relations as $relation){
+				$tab[$i] = $relation->nomc;
+				$c[$relation->nomc] =  $this->request->session()->read('User.'. $relation->nomc);
+				$i = $i +1; 
+			}
+			
+		}
 		
 		//echo $c['r_associated']; 
 		
@@ -65,36 +48,26 @@ class RelationsController extends AppController
 			//Recuperation des données
 			$d = $this->request->data;
 			
-			//echo sizeof($d);
-			//echo sizeof($tab);
 			//Obliger pour pouvoir les comparer 
 			$arraye = array_combine($tab, $d);
 
-			//Change la valeur dans le cookie
+			//Change la valeur dans la session
 			foreach($arraye as $k => $a){
 				//echo $k  . " " . $a . "\n";
 				if($a === '0'){
-					$this->Cookie->write('User.' . $k , '');
-					$this->request->session()->write('User.'. $k , '');
-				}				
+					$this->request->session()->write('User.'. $k , ' ');
+					$c[$k]=' ';				
+				}
+				else{
+					$this->request->session()->write('User.'. $k , 'checked');
+					$c[$k]='checked';				
+				}
 			}
-			$c =  $this->Cookie->read('User');
-			$this->set("c", $c);
-			
-			echo $c['r_associated'];
-			echo $c['r_learning_model'];
-			echo $this->request->session()->read('User.r_associated');
 
 		}
+		
+		//On partage le tableau c qui contient les valeurs de sessions
+		$this->set("c", $c);
     }
-	
-	
-
-    
-    /*public function view($id = null)
-    {
-        $noeud = $this->Noeuds->get($id);
-        $this->set(compact('noeud'));
-    }*/
 }
 ?>

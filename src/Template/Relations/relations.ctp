@@ -13,7 +13,15 @@
 	</fieldset>
 	<?php echo $this->Form->button('Ajouter');
 	echo $this->Form->end();?>
-
-	<?php echo $c['r_associated']; ?>
+	</br>
+</br>
+	
 </div>
 
+</br>
+</br></br>
+</br></br>
+</br></br>
+</br></br>
+</br></br>
+</br>
