@@ -42,7 +42,7 @@ class RelationsController extends AppController
 		$tab = array();
 		$i = 0; 
 		foreach ($relations as $relation){
-			$this->Cookie->write('User.'. $relation->nomc , 'true');
+			$this->Cookie->write('User.'. $relation->nomc , 'checked');
 			$tab[$i] = $relation->nomc;
 			$i = $i +1; 
 		}
@@ -73,11 +73,14 @@ class RelationsController extends AppController
 			foreach($arraye as $k => $a){
 				//echo $k  . " " . $a . "\n";
 				if($a === '0'){
-					$this->Cookie->write('User.' . $k , 'false');
+					$this->Cookie->write('User.' . $k , '');
 				}				
 			}
 			$c =  $this->Cookie->read('User');
 			$this->set("c", $c);
+			
+			echo $c['r_associated'];
+			echo $c['r_learning_model'];
 		}
     }
 	
