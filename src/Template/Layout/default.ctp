@@ -40,7 +40,7 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
     <span data-responsive-toggle="responsive-menu" data-hide-for="medium">
       <button class="menu-icon dark" type="button" data-toggle></button>
     </span>
-    <h3><strong>Diko</strong></h3>
+    <h3><strong><a href="/diko/">Diko</a></strong></h3>
   </div>
   <div id="responsive-menu">
     <div class="top-bar-left">
