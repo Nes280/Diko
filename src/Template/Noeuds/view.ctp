@@ -13,14 +13,17 @@
 	    </ul>
 	  </li>
 	  <?php
-	  echo $data;
 	  	if ($r_associated != "") {
-	  	 	echo "<li><a href=\"#\">Idée(s) Associée</a></li>";
+	  	 	echo "<li><a href=\"#\">Idée(s) Associée</a>";
+	  	 	echo "<ul class=\"menu vertical nested is-active\">";
+	  	 	foreach ($data as $value) {
+	  	 		echo "<li><a href=\"/diko/noeuds/view/$value->id\">".$value->mot."</a></li>";
+	  	 	}
+	  	 	
+	  	 	echo "</ul></li>";
+
 	  	 } 
 	  ?>
 	  
 	</ul>
-  	
-  	<p><?= h($noeud->type) ?></p>
-  	<p><?= h($noeud->poids) ?></p>
 </div>

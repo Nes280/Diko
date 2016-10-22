@@ -3,6 +3,12 @@ namespace App\Controller;
 
 class NoeudsController extends AppController
 {
+    public function initialize()
+    {
+        parent::initialize();
+        $this->loadComponent('Paginator');
+    } 
+
 	public function index()
     {
         $noeuds = $this->Noeuds->find('all', ['limit' => 50, 'order' => ['poids' => 'desc']]);
@@ -11,6 +17,10 @@ class NoeudsController extends AppController
     
     public function view($id = null)
     {
+        $paginate = [
+            'limit' => 25
+        ];
+
         $noeud = $this->Noeuds->get($id);
         $this->set(compact('noeud'));
 		//echo $this->request->session()->read('User.r_associated');
@@ -30,28 +40,36 @@ class NoeudsController extends AppController
             ),
             'order' =>array(
                  'Aretes.poids' => 'desc'   
-            ),
-            'limit' => 10
+            )
         );
 
         $identifiant = $this->Noeuds->Aretes->find('all', $options);
+        $compteur = 0;
         foreach ($identifiant as $i) {
-            $this->set('identifiant', $i);
+            //$this->set('identifiant', $i);
+            $tab[$compteur] = $i->mot2;
+            $compteur++;
         }
          
-        $options = array(
+        $options2 = array(
             'fields' => array(
                 'Noeuds.mot',
+                'Noeuds.id'
             ),
             'conditions' => array(
-                'Noeuds.id' => $i->mot2
+                'Noeuds.id IN' => $tab
             ),
         );
-        $data = $this->Noeuds->find('all', $options);
-
+        //$data = $this->Paginator->paginate($options2, $paginate);
+        $data = $this->Noeuds->find('all', $options2);
+        $compteur = 0;
         foreach ($data as $d) {
-            $this->set('data', $d);
+            if (substr($d->mot, 0, 1) != "_" AND substr($d->mot, 0, 1) != ":") {
+                $tab2[$compteur]= $d;
+                $compteur++;
+            } 
         }
+        $this->set('data',$tab2);
 
     }
 
