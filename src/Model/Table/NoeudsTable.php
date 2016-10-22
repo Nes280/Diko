@@ -11,6 +11,9 @@ class NoeudsTable extends Table
         $this->hasMany('Definitions', [
             'className' => 'Definitions'
         ]);
+        $this->hasMany('Aretes', [
+            'className' => 'Aretes'
+        ]);
 		
     }
 }

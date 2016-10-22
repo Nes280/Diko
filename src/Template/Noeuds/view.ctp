@@ -13,7 +13,8 @@
 	    </ul>
 	  </li>
 	  <?php
-	  	if ($r_associated == "checked") {
+	  echo $data;
+	  	if ($r_associated != "") {
 	  	 	echo "<li><a href=\"#\">Idée(s) Associée</a></li>";
 	  	 } 
 	  ?>

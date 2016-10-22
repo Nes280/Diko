@@ -17,10 +17,44 @@ class NoeudsController extends AppController
         $this->set('r_associated',$this->request->session()->read('User.r_associated'));
 
         $query = $this->Noeuds->findById($id)->contain(['Definitions']);
-        foreach ($query as $user) {
-            $this->set('def', $user);
-        //echo $user->definitions[0]->def;
-        }	
+        foreach ($query as $def) {
+            $this->set('def', $def);
+        }
+        
+        $options = array(
+            'fields' => array(
+                'Aretes.mot2'
+            ),
+            'conditions' => array(
+                'Aretes.mot1' => $id
+            ),
+            'order' =>array(
+                 'Aretes.poids' => 'desc'   
+            ),
+            'limit' => 10
+        );
+
+        $identifiant = $this->Noeuds->Aretes->find('all', $options);
+        foreach ($identifiant as $i) {
+            $this->set('identifiant', $i);
+        }
+         
+        $options = array(
+            'fields' => array(
+                'Noeuds.mot',
+            ),
+            'conditions' => array(
+                'Noeuds.id' => $i->mot2
+            ),
+        );
+        $data = $this->Noeuds->find('all', $options);
+
+        foreach ($data as $d) {
+            $this->set('data', $d);
+        }
+
     }
+
 }
+
 ?>
