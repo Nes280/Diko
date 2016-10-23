@@ -77,3 +77,4 @@ $RECYCLE.BIN/
 tmp/debug_kit.sqlite
 
 *.sqlite
+tmp/debug_kit.sqlite

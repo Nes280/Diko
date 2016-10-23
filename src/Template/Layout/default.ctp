@@ -54,7 +54,7 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
           </ul>
         </li>
         <li><a href="#">Two</a></li>
-        <li><a href="Relations/relations">Relation</a></li>
+        <li><?php echo $this->Html->link( 'Relation',array('controller' => 'Relations','action' => 'relations'));?></li>
       </ul>
     </div>
     <div class="top-bar-right">
