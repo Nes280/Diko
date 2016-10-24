@@ -45,7 +45,7 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
   <div id="responsive-menu">
     <div class="top-bar-left">
       <ul class="dropdown menu" data-dropdown-menu>
-        <li>
+        <!--<li>
           <a href="#">One</a>
           <ul class="menu vertical">
             <li><a href="#">One</a></li>
@@ -53,8 +53,8 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
             <li><a href="#">Three</a></li>
           </ul>
         </li>
-        <li><a href="#">Two</a></li>
-        <li><?php echo $this->Html->link( 'Relation',array('controller' => 'Relations','action' => 'relations'));?></li>
+        <li><a href="#">Two</a></li>-->
+        <li><?php echo $this->Html->link( 'Choix d\'affichage de relations',array('controller' => 'Relations','action' => 'relations'));?></li>
       </ul>
     </div>
     <div class="top-bar-right">
