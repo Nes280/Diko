@@ -7,7 +7,7 @@
 			echo $this->Form->radio('cocher_decocher',
 				[
 					['value' => 'cocher', 'text' => 'Tout cocher'],
-					['value' => 'decocher', 'text' => 'Tout decocher']
+					['value' => 'decocher', 'text' => 'Tout décocher']
 				]);		
 			echo $this->Form->button('Valider');
 			echo $this->Form->end();?>
