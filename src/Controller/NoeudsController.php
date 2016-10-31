@@ -1,8 +1,14 @@
 <?php
 namespace App\Controller;
+use Cake\Network\Http\Client;
 
 class NoeudsController extends AppController
 {
+    public $paginate = [
+        'limit' => 30
+        
+    ];
+
     public function initialize()
     {
         parent::initialize();
@@ -17,9 +23,6 @@ class NoeudsController extends AppController
     
     public function view($id = null)
     {
-        $paginate = [
-            'limit' => 25
-        ];
 
         $noeud = $this->Noeuds->get($id);
         $this->set(compact('noeud'));
@@ -63,13 +66,21 @@ class NoeudsController extends AppController
         //$data = $this->Paginator->paginate($options2, $paginate);
         $data = $this->Noeuds->find('all', $options2);
         $compteur = 0;
+        //$table="[";
         foreach ($data as $d) {
+            if ($compteur>0 AND substr($d->mot, 0, 1) != "_" AND substr($d->mot, 0, 1) != ":") {
+                //$table.= ",";
+            }
             if (substr($d->mot, 0, 1) != "_" AND substr($d->mot, 0, 1) != ":") {
                 $tab2[$compteur]= $d;
+                str_replace("\'", "'", $d->mot);
+                //$table.= "<a href=\"/diko/noeuds/view/$d->id\">".$d->mot."</a>";
                 $compteur++;
             } 
         }
-        $this->set('data',$tab2);
+        //$table .= "]";
+        $donnee = $this->paginate($data);
+        $this->set('data',$donnee);
 
     }
 
