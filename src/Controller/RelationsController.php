@@ -43,6 +43,27 @@ class RelationsController extends AppController
 		
 		//echo $c['r_associated']; 
 		
+		if($this->request->is('get')){
+			$d = $this->request->query; 
+			if(sizeof($d) === 1){
+				if($d['cocher_decocher'] === 'cocher'){
+					$action = 'checked';
+				}
+				else if($d['cocher_decocher'] === 'decocher'){
+					$action = ' ';
+				}
+				$i = 0; 
+				foreach ($relations as $relation){
+					$this->request->session()->write('User.'. $relation->nomc , $action);
+					$c[$relation->nomc] = $action; 
+					$tab[$i] = $relation->nomc;
+					$i = $i +1; 
+				}
+			}
+			
+		}
+		
+		
 		if($this->request->is('post'))
         {
 			//Recuperation des données
@@ -65,6 +86,8 @@ class RelationsController extends AppController
 			}
 
 		}
+		
+
 		
 		//On partage le tableau c qui contient les valeurs de sessions
 		$this->set("c", $c);
