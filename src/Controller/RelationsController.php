@@ -46,21 +46,25 @@ class RelationsController extends AppController
 		if($this->request->is('get')){
 			$d = $this->request->query; 
 			if(sizeof($d) === 1){
+				$r = false; 
 				if($d['cocher_decocher'] === 'cocher'){
 					$action = 'checked';
+					$r = true;
 				}
 				else if($d['cocher_decocher'] === 'decocher'){
 					$action = ' ';
+					$r = true;
 				}
-				$i = 0; 
-				foreach ($relations as $relation){
-					$this->request->session()->write('User.'. $relation->nomc , $action);
-					$c[$relation->nomc] = $action; 
-					$tab[$i] = $relation->nomc;
-					$i = $i +1; 
+				if($r){
+					$i = 0; 
+					foreach ($relations as $relation){
+						$this->request->session()->write('User.'. $relation->nomc , $action);
+						$c[$relation->nomc] = $action; 
+						$tab[$i] = $relation->nomc;
+						$i = $i +1; 
+					}
 				}
 			}
-			
 		}
 		
 		
