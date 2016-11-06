@@ -28,7 +28,54 @@ class NoeudsController extends AppController
         $this->set(compact('noeud'));
 		//echo $this->request->session()->read('User.r_associated');
         $this->set('r_associated',$this->request->session()->read('User.r_associated'));
-
+		
+		//Polarité du mot négative
+		$optionsNeg = array(
+            'fields' => array(
+                'Aretes.poids'
+            ),
+            'conditions' => array(
+                'Aretes.mot1' => $id, 
+				'Aretes.mot2' => '254878'
+            )
+        );
+		$negatif = $this->Noeuds->Aretes->find('all', $optionsNeg);
+		echo $negatif;
+		foreach ($negatif as $neg) {
+			$this->set('negatif', $neg);
+		}
+		
+		//Polarité du mot neutre
+		$optionsNeu = array(
+            'fields' => array(
+                'Aretes.poids'
+            ),
+            'conditions' => array(
+                'Aretes.mot1' => $id, 
+				'Aretes.mot2' => '254877'
+            )
+        );
+		$neutre = $this->Noeuds->Aretes->find('all', $optionsNeu);
+		foreach ($neutre as $neu) {
+			$this->set('neutre', $neu);
+		}
+		
+		//Polarité du mot positive
+		$optionsPos = array(
+            'fields' => array(
+                'Aretes.poids'
+            ),
+            'conditions' => array(
+                'Aretes.mot1' => $id, 
+				'Aretes.mot2' => '254876'
+            )
+        );
+		$positif = $this->Noeuds->Aretes->find('all', $optionsPos);
+		foreach ($positif as $pos) {
+			$this->set('positif', $pos);
+		}
+		
+		
         $query = $this->Noeuds->findById($id)->contain(['Definitions']);
         foreach ($query as $def) {
             $this->set('def', $def);

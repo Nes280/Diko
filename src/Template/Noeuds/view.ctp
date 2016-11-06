@@ -1,5 +1,10 @@
 <div class="row">
   	<h2><?= h($noeud->mot) ?></h2>
+	<h3>Polarité</h3>
+	<?= $negatif->poids ?>
+	<?= $neutre->poids ?>
+	<?= $positif->poids ?>
+
   	<ul class="vertical menu" data-accordion-menu>
 	  <li>
 	    <a href="#">Définition</a>
