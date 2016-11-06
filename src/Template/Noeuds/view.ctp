@@ -1,10 +1,22 @@
 <div class="row">
   	<h2><?= h($noeud->mot) ?></h2>
 	<h3>Polarité</h3>
-	<?= $negatif->poids ?>
-	<?= $neutre->poids ?>
-	<?= $positif->poids ?>
-
+	
+	<p>Négatif</p>
+	<div class="alert progress">
+		<div class="progress-meter" style="width: <?= $negatif->poids ?>%"> <p class="progress-meter-text"><?= $negatif->poids ?></p></div>
+	</div>
+	
+	<p>Neutre</p>
+	<div class="warning  progress">
+		<div class="progress-meter" style="width: <?= $neutre->poids ?>%"> <p class="progress-meter-text"><?= $neutre->poids ?></p></div>
+	</div>
+	
+	<p>Positif</p>
+	<div class="success progress">
+		<div class="progress-meter" style="width: <?= $positif->poids ?>%"> <p class="progress-meter-text"><?= $positif->poids ?></p></div>
+	</div>
+	
   	<ul class="vertical menu" data-accordion-menu>
 	  <li>
 	    <a href="#">Définition</a>

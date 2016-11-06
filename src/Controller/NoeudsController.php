@@ -40,7 +40,6 @@ class NoeudsController extends AppController
             )
         );
 		$negatif = $this->Noeuds->Aretes->find('all', $optionsNeg);
-		echo $negatif;
 		foreach ($negatif as $neg) {
 			$this->set('negatif', $neg);
 		}
