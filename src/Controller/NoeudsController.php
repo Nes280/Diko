@@ -1,6 +1,6 @@
 <?php
 namespace App\Controller;
-use Cake\Network\Http\Client;
+use Cake\Cache\Cache;
 
 class NoeudsController extends AppController
 {
@@ -78,9 +78,15 @@ class NoeudsController extends AppController
                 $compteur++;
             } 
         }
-        //$table .= "]";
-        $donnee = $this->paginate($data);
-        $this->set('data',$donnee);
+        if(($n = Cache::read('cache_'.$id)) !== false)
+        {
+            $this->set('data',$n);
+        }
+        else
+        {
+            $donnee = $this->paginate($data->cache('cache_'.$id));
+            $this->set('data',$donnee);
+        }
 
     }
 
