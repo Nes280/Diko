@@ -29,6 +29,7 @@ class NoeudsController extends AppController
 		//echo $this->request->session()->read('User.r_associated');
         $this->set('r_associated',$this->request->session()->read('User.r_associated'));
 		
+		$val = '0'; 
 		//Polarité du mot négative
 		$optionsNeg = array(
             'fields' => array(
@@ -40,8 +41,9 @@ class NoeudsController extends AppController
             )
         );
 		$negatif = $this->Noeuds->Aretes->find('all', $optionsNeg);
+		$this->set('negatif', $val);
 		foreach ($negatif as $neg) {
-			$this->set('negatif', $neg);
+			$this->set('negatif', $neg->poids);
 		}
 		
 		//Polarité du mot neutre
@@ -55,8 +57,9 @@ class NoeudsController extends AppController
             )
         );
 		$neutre = $this->Noeuds->Aretes->find('all', $optionsNeu);
+		$this->set('neutre', $val);
 		foreach ($neutre as $neu) {
-			$this->set('neutre', $neu);
+			$this->set('neutre', $neu->poids);
 		}
 		
 		//Polarité du mot positive
@@ -70,8 +73,9 @@ class NoeudsController extends AppController
             )
         );
 		$positif = $this->Noeuds->Aretes->find('all', $optionsPos);
+		$this->set('positif', $val);
 		foreach ($positif as $pos) {
-			$this->set('positif', $pos);
+			$this->set('positif', $pos->poids);
 		}
 		
 		
