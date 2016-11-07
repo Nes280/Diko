@@ -17,7 +17,9 @@ class NoeudsController extends AppController
 
 	public function index()
     {
-        $noeuds = $this->Noeuds->find('all', ['limit' => 50, 'order' => ['poids' => 'desc']]);
+        $noeuds = $this->Noeuds->find('all', ['limit' => 50, 'order' => ['poids' => 'desc']])->where(function ($exp, $q) {
+					return $exp->notLike('mot', '%\_%');
+				});
         $this->set('noeuds', $noeuds);
     }
     
