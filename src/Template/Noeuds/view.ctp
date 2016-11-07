@@ -3,47 +3,47 @@
 	
 	<ul class="vertical menu" data-accordion-menu>
 	  <li>
-	  	    <a href="#">Polarité en %</a>
-			<ul class="menu vertical nested is-active">
-				<div class = "row">
-					<div class="small-8 columns">
-						<div class="small-2 columns align-left">
-							Négatif
-						</div>
-						<div class="small-10 columns">						
-							<div class="alert progress">
-								<div class="progress-meter" style="width: <?= $negatif ?>%"> <p class="progress-meter-text"><?= $negatif ?></p></div>
-							</div>
+		<a href="#">Polarité en %</a>
+		<ul class="menu vertical nested is-active">
+			<div class = "row">
+				<div class="small-12 columns">
+					<div class="small-2 columns">
+						Négatif
+					</div>
+					<div class="small-10 columns">						
+						<div class="alert progress">
+							<div class="progress-meter" style="width: <?= $negatif ?>%"> <p class="progress-meter-text"><?= $negatif ?></p></div>
 						</div>
 					</div>
 				</div>
-				
-				<div class = "row">
-					<div class="small-8 columns">
-						<div class="small-2 columns align-left">
-							Neutre
-						</div>
-						<div class="small-10 columns">						
-							<div class="warning  progress">
-								<div class="progress-meter" style="width: <?= $neutre ?>%"> <p class="progress-meter-text"><?= $neutre ?></p></div>
-							</div>
+			</div>
+			
+			<div class = "row">
+				<div class="small-12 columns">
+					<div class="small-2 columns">
+						Neutre
+					</div>
+					<div class="small-10 columns">						
+						<div class="warning  progress">
+							<div class="progress-meter" style="width: <?= $neutre ?>%"> <p class="progress-meter-text"><?= $neutre ?></p></div>
 						</div>
 					</div>
 				</div>
-				
-				<div class = "row">
-					<div class="small-8 columns">
-						<div class="small-2 columns align-left">
-							Positif
-						</div>
-						<div class="small-10 columns">						
-							<div class="success progress">
-								<div class="progress-meter" style="width: <?= $positif ?>%"> <p class="progress-meter-text"><?= $positif ?></p></div>
-							</div>
+			</div>
+			
+			<div class = "row">
+				<div class="small-12 columns">
+					<div class="small-2 columns">
+						Positif
+					</div>
+					<div class="small-10 columns">						
+						<div class="success progress">
+							<div class="progress-meter" style="width: <?= $positif ?>%"> <p class="progress-meter-text"><?= $positif ?></p></div>
 						</div>
 					</div>
 				</div>
-			</ul>
+			</div>
+		</ul>
 	  </li>
 	  
 	</ul>
