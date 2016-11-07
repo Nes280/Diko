@@ -1,21 +1,54 @@
 <div class="row">
   	<h2><?= h($noeud->mot) ?></h2>
-	<h3>Polarité</h3>
 	
-	<p>Négatif</p>
-	<div class="alert progress">
-		<div class="progress-meter" style="width: <?= $negatif ?>%"> <p class="progress-meter-text"><?= $negatif ?></p></div>
-	</div>
+	<ul class="vertical menu" data-accordion-menu>
+	  <li>
+	  	    <a href="#">Polarité en %</a>
+			<ul class="menu vertical nested is-active">
+				<div class = "row">
+					<div class="small-8 columns">
+						<div class="small-2 columns align-left">
+							Négatif
+						</div>
+						<div class="small-10 columns">						
+							<div class="alert progress">
+								<div class="progress-meter" style="width: <?= $negatif ?>%"> <p class="progress-meter-text"><?= $negatif ?></p></div>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				<div class = "row">
+					<div class="small-8 columns">
+						<div class="small-2 columns align-left">
+							Neutre
+						</div>
+						<div class="small-10 columns">						
+							<div class="warning  progress">
+								<div class="progress-meter" style="width: <?= $neutre ?>%"> <p class="progress-meter-text"><?= $neutre ?></p></div>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				<div class = "row">
+					<div class="small-8 columns">
+						<div class="small-2 columns align-left">
+							Positif
+						</div>
+						<div class="small-10 columns">						
+							<div class="success progress">
+								<div class="progress-meter" style="width: <?= $positif ?>%"> <p class="progress-meter-text"><?= $positif ?></p></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</ul>
+	  </li>
+	  
+	</ul>
 	
-	<p>Neutre</p>
-	<div class="warning  progress">
-		<div class="progress-meter" style="width: <?= $neutre ?>%"> <p class="progress-meter-text"><?= $neutre ?></p></div>
-	</div>
 	
-	<p>Positif</p>
-	<div class="success progress">
-		<div class="progress-meter" style="width: <?= $positif ?>%"> <p class="progress-meter-text"><?= $positif ?></p></div>
-	</div>
 	
   	<ul class="vertical menu" data-accordion-menu>
 	  <li>
