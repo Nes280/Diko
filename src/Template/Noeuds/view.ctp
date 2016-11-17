@@ -89,9 +89,9 @@
 	  	 				echo "<li><a href=\"/diko/noeuds/view/$value->id\">".$value->mot."</a></li>";
 	  	 				echo "</div>";
 	  	 			}
+	  	 			echo "</div><div class=\"pagination text-center\" role=\"navigation\">".$this->Paginator->numbers()."</div>";
 		  	 	}
-		  	 	echo "</div>";
-		  	 	echo "<div class=\"pagination text-center\" role=\"navigation\">".$this->Paginator->numbers()."</ul></li>";
+		  	 	echo "</ul></li>";
 		  	}
 	  	 }
 	  ?>
