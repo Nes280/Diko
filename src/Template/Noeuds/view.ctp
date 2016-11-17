@@ -63,6 +63,7 @@
 	    </ul>
 	  </li>
 	  <?php
+	  /*
 	  	if ($r_associated != "") {
 	  	 	echo "<li><a href=\"#\">Idée(s) Associée</a>";
 	  	 	echo "<ul class=\"menu vertical nested is-active\">";
@@ -76,6 +77,23 @@
 	  	 	echo "</div>";
 	  	 	echo "<div class=\"pagination text-center\" role=\"navigation\">".$this->Paginator->numbers()."</div></ul></li>";
 	  	 } 
+	  */
+	  	 foreach ($relations as $key => $value) {
+	  	 	if ($value == 'checked') {
+		  	 	echo "<li><a href=\"#\">$key</a>";
+		  	 	echo "<ul class=\"menu vertical nested is-unactive\">";
+		  	 	echo "<div class=\"row align-rigth\">";
+		  	 	if ($key == 'r_associated') {
+		  	 		foreach ($r_associated as $value) {
+	  	 				echo "<div class=\"large-4 column\">";
+	  	 				echo "<li><a href=\"/diko/noeuds/view/$value->id\">".$value->mot."</a></li>";
+	  	 				echo "</div>";
+	  	 			}
+		  	 	}
+		  	 	echo "</div>";
+		  	 	echo "<div class=\"pagination text-center\" role=\"navigation\">".$this->Paginator->numbers()."</ul></li>";
+		  	}
+	  	 }
 	  ?>
 	  
 	</ul>

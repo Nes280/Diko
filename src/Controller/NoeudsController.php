@@ -28,8 +28,7 @@ class NoeudsController extends AppController
 
         $noeud = $this->Noeuds->get($id);
         $this->set(compact('noeud'));
-		//echo $this->request->session()->read('User.r_associated');
-        $this->set('r_associated',$this->request->session()->read('User.r_associated'));
+        //$this->set('r_associated',$this->request->session()->read('User.r_associated'));
 		
 		$val = '0'; 
 		//Polarité du mot négative
@@ -80,12 +79,23 @@ class NoeudsController extends AppController
 			$this->set('positif', $pos->poids);
 		}
 		
-		
+        //recupere les relation en session
+        $name = $this->request->session()->read("diko");
+        if ($name == true) {
+            $relations = $this->request->session()->read("User");
+            $this->set('relations', $relations);
+        }
+        //else A FAIRE, RECUPERER TOUTES LES RELATIONS EN BD
+
+
+
+		//les definitions
         $query = $this->Noeuds->findById($id)->contain(['Definitions']);
         foreach ($query as $def) {
             $this->set('def', $def);
         }
         
+        //requête des r_associated
         $options = array(
             'fields' => array(
                 'Aretes.mot2'
@@ -97,11 +107,9 @@ class NoeudsController extends AppController
                  'Aretes.poids' => 'desc'   
             )
         );
-
         $identifiant = $this->Noeuds->Aretes->find('all', $options);
         $compteur = 0;
         foreach ($identifiant as $i) {
-            //$this->set('identifiant', $i);
             $tab[$compteur] = $i->mot2;
             $compteur++;
         }
@@ -115,14 +123,9 @@ class NoeudsController extends AppController
                 'Noeuds.id IN' => $tab
             ),
         );
-        //$data = $this->Paginator->paginate($options2, $paginate);
         $data = $this->Noeuds->find('all', $options2);
         $compteur = 0;
-        //$table="[";
         foreach ($data as $d) {
-            if ($compteur>0 AND substr($d->mot, 0, 1) != "_" AND substr($d->mot, 0, 1) != ":") {
-                //$table.= ",";
-            }
             if (substr($d->mot, 0, 1) != "_" AND substr($d->mot, 0, 1) != ":") {
                 $tab2[$compteur]= $d;
                 str_replace("\'", "'", $d->mot);
@@ -130,15 +133,21 @@ class NoeudsController extends AppController
                 $compteur++;
             } 
         }
+        $donnee = $this->paginate($data);
+        $this->set('r_associated',$donnee);
+        /*
         if(($n = Cache::read('cache_'.$id)) !== false)
         {
             $this->set('data',$n);
         }
         else
         {
-            $donnee = $this->paginate($data->cache('cache_'.$id));
-            $this->set('data',$donnee);
+            //$donnee = $this->paginate($data->cache('cache_'.$id));
+            //$donnee = $this->paginate();
+            $this->set('r_associated',$donnee);
         }
+        */
+        
 
     }
 
