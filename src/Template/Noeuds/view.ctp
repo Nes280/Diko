@@ -78,7 +78,7 @@
 	  	 	echo "<div class=\"pagination text-center\" role=\"navigation\">".$this->Paginator->numbers()."</div></ul></li>";
 	  	 } 
 	  */
-	  	 foreach ($relations as $key => $value) {
+	  	 /*foreach ($relations as $key => $value) {
 	  	 	if ($value == 'checked') {
 		  	 	echo "<li><a href=\"#\">$key</a>";
 		  	 	echo "<ul class=\"menu vertical nested is-unactive\">";
@@ -93,7 +93,34 @@
 		  	 	}
 		  	 	echo "</ul></li>";
 		  	}
+	  	 }*/
+		 foreach ($relationMots as $key => $value) {
+			if($session !== 'session'){ 
+				echo "<p>Pas session </p>";
+				echo "<li><a href=\"#\">$key</a>";
+				echo "<ul class=\"menu vertical nested is-unactive\">";
+				echo "<div class=\"row align-rigth\">";
+				foreach($value as $mot){
+					echo "<div class=\"large-4 column\">";
+					echo "<li><a href=\"/diko/noeuds/view/$mot[0]\">".$mot[1]."</a></li>";
+	  	 			echo "</div>";
+				}
+				echo "</ul></li>";
+			}
+			else if(($s = $this->request->session()->read('User.' . $key)) === 'checked' ){
+				echo "<p>session et cocher</p>";
+				echo "<li><a href=\"#\">$key</a>";
+				echo "<ul class=\"menu vertical nested is-unactive\">";
+				echo "<div class=\"row align-rigth\">";
+				foreach($value as $mot){
+					echo "<div class=\"large-4 column\">";
+					echo "<li><a href=\"/diko/noeuds/view/$mot[0]\">".$mot[1]."</a></li>";
+	  	 			echo "</div>";
+				}
+				echo "</ul></li>";
+			}
 	  	 }
+		 
 	  ?>
 	  
 	</ul>

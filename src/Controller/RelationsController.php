@@ -19,23 +19,23 @@ class RelationsController extends AppController
 		
 		$r = $this->request->session()->read("diko");
 		//Si il y a pas de sessions avant
-		if($r !== 'true'){
+		if($r !== 'session'){
 			//Création des variables de sessions
 			$i = 0; 
 			foreach ($relations as $relation){
-				$this->request->session()->write('User.'. $relation->nomc , 'checked');
-				$c[$relation->nomc] = 'checked'; 
-				$tab[$i] = $relation->nomc;
+				$this->request->session()->write('User.'. $relation->noml , 'checked');
+				$c[$relation->noml] = 'checked'; 
+				$tab[$i] = $relation->noml;
 				$i = $i +1; 
 			}
-			$this->request->session()->write('diko', 'true');
+			$this->request->session()->write('diko', 'session');
 		}
 		else{
 			//initialisation des tableaux
 			$i = 0; 
 			foreach ($relations as $relation){
-				$tab[$i] = $relation->nomc;
-				$c[$relation->nomc] =  $this->request->session()->read('User.'. $relation->nomc);
+				$tab[$i] = $relation->noml;
+				$c[$relation->noml] =  $this->request->session()->read('User.'. $relation->noml);
 				$i = $i +1; 
 			}
 			
@@ -58,9 +58,9 @@ class RelationsController extends AppController
 				if($r){
 					$i = 0; 
 					foreach ($relations as $relation){
-						$this->request->session()->write('User.'. $relation->nomc , $action);
-						$c[$relation->nomc] = $action; 
-						$tab[$i] = $relation->nomc;
+						$this->request->session()->write('User.'. $relation->noml , $action);
+						$c[$relation->noml] = $action; 
+						$tab[$i] = $relation->noml;
 						$i = $i +1; 
 					}
 				}

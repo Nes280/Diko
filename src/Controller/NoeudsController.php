@@ -79,9 +79,11 @@ class NoeudsController extends AppController
 			$this->set('positif', $pos->poids);
 		}
 		
-        //recupere les relation en session
+        //recupere les relations en session
         $name = $this->request->session()->read("diko");
-        if ($name == true) {
+		echo $name;
+		$this->set('session', $name);
+        if ($name === 'session') {
             $relations = $this->request->session()->read("User");
             $this->set('relations', $relations);
         }
@@ -95,46 +97,106 @@ class NoeudsController extends AppController
             $this->set('def', $def);
         }
         
-        //requête des r_associated
+        //requête qui va recuperer le mot et la relation dans Aretes
         $options = array(
             'fields' => array(
-                'Aretes.mot2'
+                'Aretes.mot2', 
+				'Aretes.rel'
             ),
             'conditions' => array(
                 'Aretes.mot1' => $id
             ),
             'order' =>array(
-                 'Aretes.poids' => 'desc'   
+				'Aretes.rel' => 'desc',
+                'Aretes.poids' => 'desc'				 
             )
         );
         $identifiant = $this->Noeuds->Aretes->find('all', $options);
-        $compteur = 0;
+        
+		//On construit 2 tableaux un pour les mots et un pour les relations
+		$compteur = 0;
+		$tabMot;
+		$tabRel;
         foreach ($identifiant as $i) {
-            $tab[$compteur] = $i->mot2;
+            $tabMot[$compteur] = $i->mot2;
+			$tabRel[$compteur] = $i->rel;
             $compteur++;
         }
-         
+		//echo sizeof($tabMot) . " = " .sizeof($tabRel);
+        
+		//Requete qui va chercher l'id et le mot dans Noeud
         $options2 = array(
             'fields' => array(
                 'Noeuds.mot',
                 'Noeuds.id'
             ),
             'conditions' => array(
-                'Noeuds.id IN' => $tab
+                'Noeuds.id IN' => $tabMot
             ),
         );
         $data = $this->Noeuds->find('all', $options2);
-        $compteur = 0;
+        
+		//On construit un tableau contenant les mots à recuperer
+		$compteur = 0;
+		$tabMotAAfficher;
         foreach ($data as $d) {
             if (substr($d->mot, 0, 1) != "_" AND substr($d->mot, 0, 1) != ":") {
-                $tab2[$compteur]= $d;
+                $tabMotAAfficher[$compteur]= $d;
                 str_replace("\'", "'", $d->mot);
                 //$table.= "<a href=\"/diko/noeuds/view/$d->id\">".$d->mot."</a>";
                 $compteur++;
-            } 
+            }
         }
-        $donnee = $this->paginate($data);
-        $this->set('r_associated',$donnee);
+        /*$donnee = $this->paginate($data);
+        $this->set('r_associated',$donnee);*/
+		
+		//Requete qui va chercher le noml et l'id dans Relation
+		$options3 = array(
+            'fields' => array(
+                'Relations.noml',
+                'Relations.id'
+            ),
+            'conditions' => array(
+                'Relations.id IN' => $tabRel
+            ),
+        );
+		$relations = $this->Noeuds->Aretes->Relations->find('all', $options3);
+		$tabRelationAAfficher;
+		$compteur = 0;	
+		foreach($relations as $relation){
+			$tabRelationAAfficher[$compteur] = $relation;
+			$compteur++;
+		}
+		//echo sizeof($tabRelationAAfficher);
+		
+		//Tableaux pour l'affichage
+		//Parcours des relations possibles
+		$tabRetour;
+		for($i = 0; $i < sizeof($tabRelationAAfficher); $i++){
+			//Parcours des id des relations (requete 1)
+			$tabMotRel = null;
+			$compteurMot = 0;
+			for($j = 0; $j < sizeof($tabRel); $j++){
+				//Meme relation
+				if($tabRel[$j] === $tabRelationAAfficher[$i]->id){
+					//on parcours les mots
+					for($k = 0; $k < sizeof($tabMotAAfficher); $k++){
+						//le mot est à afficher
+						if($tabMotAAfficher[$k]->id === $tabMot[$j]){
+							$tabMotRel[$compteurMot] = array($tabMotAAfficher[$k]->id, $tabMotAAfficher[$k]->mot);
+							$compteurMot++;
+						}
+					}
+				}
+			}
+			
+			$tabRetour[$tabRelationAAfficher[$i]->noml] = $tabMotRel; 
+		}
+		
+		print_r($tabRetour);
+		
+		$this->set('relationMots',$tabRetour);
+		
         /*
         if(($n = Cache::read('cache_'.$id)) !== false)
         {
