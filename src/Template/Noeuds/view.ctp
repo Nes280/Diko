@@ -96,7 +96,6 @@
 	  	 }*/
 		 foreach ($relationMots as $key => $value) {
 			if($session !== 'session'){ 
-				echo "<p>Pas session </p>";
 				echo "<li><a href=\"#\">$key</a>";
 				echo "<ul class=\"menu vertical nested is-unactive\">";
 				echo "<div class=\"row align-rigth\">";
@@ -108,7 +107,6 @@
 				echo "</ul></li>";
 			}
 			else if(($s = $this->request->session()->read('User.' . $key)) === 'checked' ){
-				echo "<p>session et cocher</p>";
 				echo "<li><a href=\"#\">$key</a>";
 				echo "<ul class=\"menu vertical nested is-unactive\">";
 				echo "<div class=\"row align-rigth\">";

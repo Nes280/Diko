@@ -189,11 +189,13 @@ class NoeudsController extends AppController
 					}
 				}
 			}
+			if(sizeof($tabMotRel)>0){
+				$tabRetour[$tabRelationAAfficher[$i]->noml] = $tabMotRel; 
+			}
 			
-			$tabRetour[$tabRelationAAfficher[$i]->noml] = $tabMotRel; 
 		}
 		
-		print_r($tabRetour);
+		//print_r($tabRetour);
 		
 		$this->set('relationMots',$tabRetour);
 		
