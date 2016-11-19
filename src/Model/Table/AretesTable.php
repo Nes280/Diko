@@ -11,6 +11,9 @@ class AretesTable extends Table
 		$this->hasMany('Relations', [
             'className' => 'Relations'
         ]);
+		$this->hasMany('Noeuds', [
+            'className' => 'Noeuds'
+        ]);
     }
 }
 ?>
