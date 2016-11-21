@@ -78,7 +78,7 @@
 	  	 	echo "<div class=\"pagination text-center\" role=\"navigation\">".$this->Paginator->numbers()."</div></ul></li>";
 	  	 } 
 	  */
-	  	 foreach ($relations as $key => $value) {
+	  	 /*foreach ($relations as $key => $value) {
 	  	 	if ($value == 'checked') {
 		  	 	echo "<li><a href=\"#\">$key</a>";
 		  	 	echo "<ul class=\"menu vertical nested is-unactive\">";
@@ -93,7 +93,7 @@
 		  	 	}
 		  	 	echo "</ul></li>";
 		  	}
-	  	 }
+	  	 }*/
 		 foreach ($relationMots as $key => $value) {
 			if($session !== 'session'){ 
 				echo "<li><a href=\"#\">$key</a>";
@@ -141,6 +141,11 @@
 	  
 	</ul>
 </div>
+</br>
+</br>
+</br>
+</br>
+
 
 <!--script type="text/javascript">
 $(function() {

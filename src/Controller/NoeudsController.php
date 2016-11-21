@@ -172,6 +172,8 @@ class NoeudsController extends AppController
 		//Tableaux pour l'affichage
 		//Parcours des relations possibles
 		$tabRetour;
+		/*$debut = 0; 
+		$fin = sizeof($tabRel);*/
 		for($i = 0; $i < sizeof($tabRelationAAfficher); $i++){
 			//Parcours des id des relations (requete 1)
 			$tabMotRel = null;
@@ -179,6 +181,7 @@ class NoeudsController extends AppController
 			for($j = 0; $j < sizeof($tabRel); $j++){
 				//Meme relation
 				if($tabRel[$j] === $tabRelationAAfficher[$i]->id){
+					//$debut++;
 					//on parcours les mots
 					for($k = 0; $k < sizeof($tabMotAAfficher); $k++){
 						//le mot est à afficher
@@ -191,10 +194,6 @@ class NoeudsController extends AppController
 			}
 			if(sizeof($tabMotRel)>0){
 				$tabRetour[$tabRelationAAfficher[$i]->noml] = $tabMotRel; 
-                foreach ($tabMotRel as $key) {
-                    foreach ($key as $key2 => $value2) {
-                    }
-                }
 			}
 			
 		}
