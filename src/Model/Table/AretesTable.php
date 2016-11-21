@@ -9,11 +9,16 @@ class AretesTable extends Table
     {
         $this->addBehavior('Timestamp');
 		$this->hasMany('Relations', [
-            'className' => 'Relations'
+            'className' => 'Relations',
+			['foreignKey' => ['id'],
+			 'bindingKey' => [ 'rel']]
+			
         ]);
 		$this->hasMany('Noeuds', [
-            'className' => 'Noeuds'
-        ]);
+            'className' => 'Noeuds', 
+			['foreignKey' => ['id', 'id'],
+			 'bindingKey' => [ 'mot1', 'mot2']]
+		]);
     }
 }
 ?>

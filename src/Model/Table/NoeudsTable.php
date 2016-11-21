@@ -12,7 +12,9 @@ class NoeudsTable extends Table
             'className' => 'Definitions'
         ]);
         $this->hasMany('Aretes', [
-            'className' => 'Aretes'
+            'className' => 'Aretes', 
+			['foreignKey' => ['mot1', 'mot2' ],
+			 'bindingKey' => [ 'id', 'id' ]]
         ]);
 		
     }

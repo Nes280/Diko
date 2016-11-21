@@ -9,7 +9,9 @@ class RelationsTable extends Table
     {
         $this->addBehavior('Timestamp');
 		$this->hasMany('Aretes', [
-            'className' => 'Aretes'
+            'className' => 'Aretes', 
+			['foreignKey' => ['rel', ],
+			 'bindingKey' => [ 'id', ]]
         ]);
     }
 }
