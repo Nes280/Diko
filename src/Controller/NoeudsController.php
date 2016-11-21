@@ -97,6 +97,87 @@ class NoeudsController extends AppController
             $this->set('def', $def);
         }
         
+        //$donnees = $this->Noeuds->query("SELECT r.noml, n2.mot FROM `Aretes` as a, `Noeuds` as n1, `Noeuds` as n2, `Relations` as r WHERE a.mot1 = n1.id and a.mot2 = n2.id and a.rel = r.id and n1.id ={$id} order by r.noml asc, n2.poids desc;");
+        /*$options['contain']=array('Noeuds', 'Relations');
+        $options['joins']=array(
+             array(
+                'table' => 'aretes', 
+                'alias' => 'a'),
+            array(
+                'table' => 'noeuds',
+                'alias' => 'n1',
+                "type" => "INNER",
+                'conditions' => array('n1.id = a.mot1')
+                ),
+            array(
+                'table' => 'noeuds',
+                'alias' => 'n2',
+                "type" => "INNER",
+                'conditions' => array('n2.id = a.mot1')
+                ),
+            array(
+                'table' => 'relations',
+                'alias' => 'r',
+                "type" => "INNER",
+                'conditions' => array('r.id = a.rel')
+                )
+            );
+        $options['conditions'] = array(
+            'n1.id' => $id
+            );
+        $options['fields'] = array(
+            'r.noml', 'n2.mot'
+            );
+        $options['order'] = array('r.noml' => 'asc', 'n2.poids' => 'desc'); 
+        $donnees = $this->Noeuds->Aretes->find('all',$options);*/
+        
+        
+        /*$donnees = $this->Noeuds->Aretes->find('all', array(
+            'joins' => array(
+                array(
+                    'table' => 'noeuds',
+                    'alias' => 'NoeudsJoin',
+                    'type' => 'INNER',
+                    'conditions' => array(
+                        'NoeudsJoin.id = Aretes.mot2'
+                    )
+                )
+            ),
+            'conditions' => array(
+                'Aretes.mot1' => $id
+            ),
+            'fields' => array('NoeudsJoin.*', 'Aretes.*'),
+            'order' => 'Aretes.rel DESC'
+        ));*/
+        
+        /*$donnees = $this->Noeuds->find('all', array(
+            'fields' => array('Noeud.*','AretesAlias.*'),
+            'joins' => array(
+                array(
+                        'table' => 'Aretes',
+                        'alias' => 'AretesAlias',
+                        'type' => 'INNER',
+                        'conditions' => array(
+                        'AretesAlias.mot2' =>'Noeuds.id' 
+                        )
+                    ),
+                ),
+            'conditions' => array('AretesAlias.mot1' => $id)
+            )
+        );
+        
+        $compteur =0;
+        foreach($donnees as $donnee){
+            if(substr($donnee->mot, 0, 1) != "_" AND substr($donnee->mot, 0, 1) != ":"){
+                echo $donnee->rel . " " . $donnee->mot . " \n"; 
+                $tab[] = $donnee;
+                $compteur++;
+            }
+        }
+        echo print_r($tab);
+        //$this->set('relationMots',$tab);*/
+        
+
         //requête qui va recuperer le mot et la relation dans Aretes
         $options = array(
             'fields' => array(
