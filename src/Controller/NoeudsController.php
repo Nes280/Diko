@@ -101,13 +101,14 @@ class NoeudsController extends AppController
         $connection = ConnectionManager::get('default');
         $results = $connection->execute('SELECT r.noml, n2.mot FROM `Aretes` as a, `Noeuds` as n1, `Noeuds` as n2, `Relations` as r WHERE a.mot1 = n1.id and a.mot2 = n2.id and a.rel = r.id and n1.id ='.$id.' order by r.noml asc, n2.poids desc;');
         //$donnees = $this->query("SELECT r.noml, n2.mot FROM `Aretes` as a, `Noeuds` as n1, `Noeuds` as n2, `Relations` as r WHERE a.mot1 = n1.id and a.mot2 = n2.id and a.rel = r.id and n1.id ={$id} order by r.noml asc, n2.poids desc;");
-        $toto = array();
-        $totoc=0;
+        $tabRetour = array();
+
         foreach ($results as $result) {
-           $toto[$totoc]= $result;
-           $totoc++;
+			if (substr($result[1], 0, 1) != "_" AND substr($result[1], 0, 1) != ":") {
+				$tabRetour[$result[0]][]= $result[1];
+			}
         }
-        print_r($toto);
+		$this->set('relationMots',$tabRetour);
         //$this->set('req', $donnees);
         /*$options['contain']=array('Noeuds', 'Relations');
         $options['joins']=array(
@@ -190,7 +191,7 @@ class NoeudsController extends AppController
         
 
         //requête qui va recuperer le mot et la relation dans Aretes
-        $options = array(
+        /*$options = array(
             'fields' => array(
                 'Aretes.mot2', 
                 'Aretes.rel'
@@ -243,7 +244,7 @@ class NoeudsController extends AppController
         $this->set('r_associated',$donnee);*/
         
         //Requete qui va chercher le noml et l'id dans Relation
-        $options3 = array(
+        /*$options3 = array(
             'fields' => array(
                 'Relations.noml',
                 'Relations.id'
@@ -266,7 +267,7 @@ class NoeudsController extends AppController
         $tabRetour;
         /*$debut = 0; 
         $fin = sizeof($tabRel);*/
-        for($i = 0; $i < sizeof($tabRelationAAfficher); $i++){
+        /*for($i = 0; $i < sizeof($tabRelationAAfficher); $i++){
             //Parcours des id des relations (requete 1)
             $tabMotRel = null;
             $compteurMot = 0;

@@ -102,8 +102,8 @@
 				echo "<div class=\"list\">";
 				foreach($value as $mot){
 					echo "<div class=\"large-4 column\" class=\"list\">";
-					echo "<li><a href=\"/diko/noeuds/view/$mot[0]\">".$mot[1]."</a></li>";
-					//echo "<li><a href=\"/diko/noeuds/view/$mot[0]\">".$mot[1]."</a></li>";
+					echo "<li><a href=\"/diko/noeuds/view/$mot\">".$mot."</a></li>";
+					//echo "<li><a href=\"/diko/noeuds/view/$mot\">".$mot."</a></li>";
 	  	 			echo "</div>";
 				}
 				echo "</div><ul class=\"pagination\"></ul></div></ul></li>";
@@ -130,7 +130,7 @@
 				echo "<div class=\"row align-rigth\">";
 				foreach($value as $mot){
 					echo "<div class=\"large-4 column\">";
-					echo "<li><a href=\"/diko/noeuds/view/$mot[0]\">".$mot[1]."</a></li>";
+					echo "<li><a href=\"/diko/noeuds/view/$mot\">".$mot."</a></li>";
 	  	 			echo "</div>";
 				}
 				echo "</ul></li>";
