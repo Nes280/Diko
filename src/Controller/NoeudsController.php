@@ -100,7 +100,7 @@ class NoeudsController extends AppController
 
         $connection = ConnectionManager::get('default');
         $results = $connection->execute('SELECT r.noml, n2.mot FROM `Aretes` as a, `Noeuds` as n1, `Noeuds` as n2, `Relations` as r WHERE a.mot1 = n1.id and a.mot2 = n2.id and a.rel = r.id and n1.id ='.$id.' order by r.noml asc, n2.poids desc;');
-        //$donnees = $this->query("SELECT r.noml, n2.mot FROM `Aretes` as a, `Noeuds` as n1, `Noeuds` as n2, `Relations` as r WHERE a.mot1 = n1.id and a.mot2 = n2.id and a.rel = r.id and n1.id ={$id} order by r.noml asc, n2.poids desc;");
+        //$donnees = $this->query("SELECT r.noml, n2.mot FROM `aretes` as a, `noeuds` as n1, `noeuds` as n2, `relations` as r WHERE a.mot1 = n1.id and a.mot2 = n2.id and a.rel = r.id and n1.id ={$id} order by r.noml asc, n2.poids desc;");
         $tabRetour = array();
 
         foreach ($results as $result) {
