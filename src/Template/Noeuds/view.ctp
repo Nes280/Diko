@@ -78,7 +78,7 @@
 	  	 	echo "<div class=\"pagination text-center\" role=\"navigation\">".$this->Paginator->numbers()."</div></ul></li>";
 	  	 } 
 	  */
-	  	 /*foreach ($relations as $key => $value) {
+	  	 foreach ($relations as $key => $value) {
 	  	 	if ($value == 'checked') {
 		  	 	echo "<li><a href=\"#\">$key</a>";
 		  	 	echo "<ul class=\"menu vertical nested is-unactive\">";
@@ -93,18 +93,36 @@
 		  	 	}
 		  	 	echo "</ul></li>";
 		  	}
-	  	 }*/
+	  	 }
 		 foreach ($relationMots as $key => $value) {
 			if($session !== 'session'){ 
 				echo "<li><a href=\"#\">$key</a>";
 				echo "<ul class=\"menu vertical nested is-unactive\">";
-				echo "<div class=\"row align-rigth\">";
+				echo "<div class=\"row align-rigth\" id=\"$key\">";
+				echo "<div class=\"list\">";
 				foreach($value as $mot){
-					echo "<div class=\"large-4 column\">";
+					echo "<div class=\"large-4 column\" class=\"list\">";
 					echo "<li><a href=\"/diko/noeuds/view/$mot[0]\">".$mot[1]."</a></li>";
+					//echo "<li><a href=\"/diko/noeuds/view/$mot[0]\">".$mot[1]."</a></li>";
 	  	 			echo "</div>";
 				}
-				echo "</ul></li>";
+				echo "</div><ul class=\"pagination\"></ul></div></ul></li>";
+				echo "<script>
+ var outerWindow = {
+    name: \"outerWindow\",
+    paginationClass: \"pagination\",
+    outerWindow: 2
+  };
+  var options = {
+    valueNames: [ 'name', 'category' ],
+    page: 10,
+    plugins: [
+      ListPagination(outerWindow)
+
+    ]
+  };
+  var listObj = new List('$key', options);
+</script>";
 			}
 			else if(($s = $this->request->session()->read('User.' . $key)) === 'checked' ){
 				echo "<li><a href=\"#\">$key</a>";
@@ -123,7 +141,6 @@
 	  
 	</ul>
 </div>
-
 
 <!--script type="text/javascript">
 $(function() {

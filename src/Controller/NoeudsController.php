@@ -191,6 +191,10 @@ class NoeudsController extends AppController
 			}
 			if(sizeof($tabMotRel)>0){
 				$tabRetour[$tabRelationAAfficher[$i]->noml] = $tabMotRel; 
+                foreach ($tabMotRel as $key) {
+                    foreach ($key as $key2 => $value2) {
+                    }
+                }
 			}
 			
 		}
