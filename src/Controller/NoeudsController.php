@@ -100,7 +100,6 @@ class NoeudsController extends AppController
 		//Requete pour avoir les relations->mots
 		if(($n = Cache::read('cache_'.$id)) !== false)
         {
-			echo "cache";
             $this->set('relationMots',$n);
         }
         else
