@@ -82,7 +82,6 @@ class NoeudsController extends AppController
         
         //recupere les relations en session
         $name = $this->request->session()->read("diko");
-        echo $name;
         $this->set('session', $name);
         if ($name === 'session') {
             $relations = $this->request->session()->read("User");
@@ -98,17 +97,34 @@ class NoeudsController extends AppController
             $this->set('def', $def);
         }
 
-        $connection = ConnectionManager::get('default');
-        $results = $connection->execute('SELECT r.noml, n2.mot FROM `Aretes` as a, `Noeuds` as n1, `Noeuds` as n2, `Relations` as r WHERE a.mot1 = n1.id and a.mot2 = n2.id and a.rel = r.id and n1.id ='.$id.' order by r.noml asc, n2.poids desc;');
-        //$donnees = $this->query("SELECT r.noml, n2.mot FROM `aretes` as a, `noeuds` as n1, `noeuds` as n2, `relations` as r WHERE a.mot1 = n1.id and a.mot2 = n2.id and a.rel = r.id and n1.id ={$id} order by r.noml asc, n2.poids desc;");
-        $tabRetour = array();
-
-        foreach ($results as $result) {
-			if (substr($result[1], 0, 1) != "_" AND substr($result[1], 0, 1) != ":") {
-				$tabRetour[$result[0]][]= $result[1];
-			}
+		//Requete pour avoir les relations->mots
+		if(($n = Cache::read('cache_'.$id)) !== false)
+        {
+			echo "cache";
+            $this->set('relationMots',$n);
         }
-		$this->set('relationMots',$tabRetour);
+        else
+        {
+			$connection = ConnectionManager::get('default');
+			$results = $connection->execute('SELECT r.noml, n2.mot FROM `aretes` as a, `noeuds` as n1, `noeuds` as n2, `relations` as r WHERE a.mot1 = n1.id and a.mot2 = n2.id and a.rel = r.id and n1.id ='.$id.' order by r.noml asc, n2.poids desc;');
+			$tabRetour = array();
+
+			foreach ($results as $result) {
+				if (substr($result[1], 0, 1) != "_" AND substr($result[1], 0, 1) != ":") {
+					$tabRetour[$result[0]][]= $result[1];
+				}
+			}
+			Cache::write('cache_'.$id, $tabRetour);
+			$this->set('relationMots',$tabRetour);
+            //$donnee = $this->paginate($data->cache('cache_'.$id));
+            //$donnee = $this->paginate();
+            //$this->set('r_associated',$donnee);
+        }
+		
+		
+		
+        //$donnees = $this->query("SELECT r.noml, n2.mot FROM `aretes` as a, `noeuds` as n1, `noeuds` as n2, `relations` as r WHERE a.mot1 = n1.id and a.mot2 = n2.id and a.rel = r.id and n1.id ={$id} order by r.noml asc, n2.poids desc;");
+
         //$this->set('req', $donnees);
         /*$options['contain']=array('Noeuds', 'Relations');
         $options['joins']=array(
