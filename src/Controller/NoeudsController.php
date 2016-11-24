@@ -87,13 +87,11 @@ class NoeudsController extends AppController
             $relations = $this->request->session()->read("User");
             $this->set('relations', $relations);
         }
-        //else A FAIRE, RECUPERER TOUTES LES RELATIONS EN BD
-
-
 
         //les definitions
         $query = $this->Noeuds->findById($id)->contain(['Definitions']);
         foreach ($query as $def) {
+            //debug($def;
             $this->set('def', $def);
         }
 
@@ -105,14 +103,15 @@ class NoeudsController extends AppController
         else
         {
 			$connection = ConnectionManager::get('default');
-			$results = $connection->execute('SELECT r.noml, n2.mot FROM `aretes` as a, `noeuds` as n1, `noeuds` as n2, `relations` as r WHERE a.mot1 = n1.id and a.mot2 = n2.id and a.rel = r.id and n1.id ='.$id.' order by r.noml asc, n2.poids desc;');
+			$results = $connection->execute('SELECT r.noml, n2.mot, n2.id FROM `aretes` as a, `noeuds` as n1, `noeuds` as n2, `relations` as r WHERE a.mot1 = n1.id and a.mot2 = n2.id and a.rel = r.id and n1.id ='.$id.' order by r.noml asc, n2.poids desc;');
 			$tabRetour = array();
 
 			foreach ($results as $result) {
 				if (substr($result[1], 0, 1) != "_" AND substr($result[1], 0, 1) != ":") {
-					$tabRetour[$result[0]][]= $result[1];
+					$tabRetour[$result[0]][]= array($result[1], $result[2]);
 				}
 			}
+            debug($tabRetour);
 			Cache::write('cache_'.$id, $tabRetour);
 			$this->set('relationMots',$tabRetour);
             //$donnee = $this->paginate($data->cache('cache_'.$id));

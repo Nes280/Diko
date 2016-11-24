@@ -100,14 +100,17 @@
 				echo "<ul class=\"menu vertical nested is-unactive\">";
 				echo "<div class=\"row align-rigth\" id=\"$key\">";
 				echo "<div class=\"list\">";
+				$compteur = 0;
 				foreach($value as $mot){
 					echo "<div class=\"large-4 column\" class=\"list\">";
-					echo "<li><a href=\"/diko/noeuds/view/$mot\">".$mot."</a></li>";
+					echo "<li><a href=\"/diko/noeuds/view/$mot[1]\">".$mot[0]."</a></li>";
 					//echo "<li><a href=\"/diko/noeuds/view/$mot\">".$mot."</a></li>";
 	  	 			echo "</div>";
+	  	 			$compteur++;
 				}
 				echo "</div><ul class=\"pagination\"></ul></div></ul></li>";
-				echo "<script>
+				if ($compteur>10)
+				{echo "<script>
  var outerWindow = {
     name: \"outerWindow\",
     paginationClass: \"pagination\",
@@ -122,18 +125,38 @@
     ]
   };
   var listObj = new List('$key', options);
-</script>";
+</script>";}
+				
 			}
 			else if(($s = $this->request->session()->read('User.' . $key)) === 'checked' ){
 				echo "<li><a href=\"#\">$key</a>";
 				echo "<ul class=\"menu vertical nested is-unactive\">";
 				echo "<div class=\"row align-rigth\">";
+				$compteur = 0;
 				foreach($value as $mot){
 					echo "<div class=\"large-4 column\">";
-					echo "<li><a href=\"/diko/noeuds/view/$mot\">".$mot."</a></li>";
+					echo "<li><a href=\"/diko/noeuds/view/$mot[1]\">".$mot[0]."</a></li>";
 	  	 			echo "</div>";
+	  	 			$compteur++;
 				}
 				echo "</ul></li>";
+				if ($compteur>10)
+				{echo "<script>
+ var outerWindow = {
+    name: \"outerWindow\",
+    paginationClass: \"pagination\",
+    outerWindow: 2
+  };
+  var options = {
+    valueNames: [ 'name', 'category' ],
+    page: 10,
+    plugins: [
+      ListPagination(outerWindow)
+
+    ]
+  };
+  var listObj = new List('$key', options);
+</script>";}
 			}
 	  	 }
 		 
