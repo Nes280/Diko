@@ -111,7 +111,7 @@ class NoeudsController extends AppController
 					$tabRetour[$result[0]][]= array($result[1], $result[2]);
 				}
 			}
-            debug($tabRetour);
+            //debug($tabRetour);
 			Cache::write('cache_'.$id, $tabRetour);
 			$this->set('relationMots',$tabRetour);
             //$donnee = $this->paginate($data->cache('cache_'.$id));

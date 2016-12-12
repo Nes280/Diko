@@ -3,7 +3,7 @@
 	
 	<ul class="vertical menu" data-accordion-menu>
 	  <li>
-		<a href="#">Polarité en %</a>
+		<a href="#"><span class=\"Warning label\">Polarité en %</span></a>
 		<ul class="menu vertical nested is-active">
 			<div class = "row">
 				<div class="small-12 columns">
@@ -52,7 +52,7 @@
 	
   	<ul class="vertical menu" data-accordion-menu>
 	  <li>
-	    <a href="#">Définition</a>
+	    <a href="#"><li><a href=\"#\"><span class=\"Warning label\">Définition</span></a></a>
 	    <ul class="menu vertical nested is-active">
 	    	
 		    <?php foreach ($def->definitions as $key): ?>
@@ -95,8 +95,15 @@
 		  	}
 	  	 }*/
 		 foreach ($relationMots as $key => $value) {
-			if($session !== 'session'){ 
-				echo "<li><a href=\"#\">$key</a>";
+			if($session !== 'session'){
+				if ($key[0] == "r" && $key[1] == "_") {
+				 	echo "<li><a href=\"#\"><span class=\"secondary label\">$key</span></a>";
+				 } 
+				else if (strpos($key, ">"))
+					{
+						echo "<li><a href=\"#\"><span class=\"alert label\">$key</span></a>";
+					}
+				else echo "<li><a href=\"#\"><span class=\"success label\">$key</span></a>";
 				echo "<ul class=\"menu vertical nested is-unactive\">";
 				echo "<div class=\"row align-rigth\" id=\"$key\">";
 				echo "<div class=\"list\">";
